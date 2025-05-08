@@ -7,6 +7,7 @@ namespace Tutorial6.Controllers
     [ApiController]
     public class VisitsController : ControllerBase
     {
+        //http://localhost:5103/api/animals/1/visits
         [HttpGet]
         public IActionResult GetVisitsForAnimal(int animalID)
         {
@@ -14,6 +15,7 @@ namespace Tutorial6.Controllers
             return Ok(visits);
         }
 
+        
         [HttpPost]
         public IActionResult AddVisit(int animalID, [FromBody] Visit visit)
         {

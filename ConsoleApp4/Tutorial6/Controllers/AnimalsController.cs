@@ -7,9 +7,11 @@ namespace Tutorial6.Controllers
     [ApiController]
     public class AnimalsController : ControllerBase
     {
+        //http://localhost:5103/api/animals
         [HttpGet]
         public IActionResult GetAll() => Ok(Database.Animals);
         
+        //http://localhost:5103/api/animals/2
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -17,12 +19,14 @@ namespace Tutorial6.Controllers
             return animal == null ? NotFound() : Ok(animal);
         }
         
+        //http://localhost:5103/api/animals/search?name=doggo
         [HttpGet("search")]
         public IActionResult SearchByName([FromQuery] string name)
         {
             var result = Database.Animals.Where(x => x.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
             return Ok(result);
         }
+        
         
         [HttpPost]
         public IActionResult Create([FromBody] Animal animal)
@@ -43,7 +47,8 @@ namespace Tutorial6.Controllers
             animal.FurColor = AnimalUpdated.FurColor;
             return NoContent();
         }
-
+        
+        //http://localhost:5103/api/animals/2
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -52,7 +57,5 @@ namespace Tutorial6.Controllers
             Database.Animals.Remove(animal);
             return NoContent();
         }
-
-
     }
 }
